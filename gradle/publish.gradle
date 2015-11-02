@@ -1,0 +1,61 @@
+/*
+ * Gradle script for publish versions to maven central
+ * Please, specified scmVersion variable in your script
+ */
+
+
+nexusStaging {
+    packageGroup = "com.scmspain" //optional if packageGroup == project.getGroup()
+    stagingProfileId = "7dd4d052409ec" //when not defined will be got from server using "packageGroup"
+}
+
+modifyPom {
+    project {
+        name 'com.scmspain.karyon:karyon2-accesslog'
+        packaging 'jar'
+        // optionally artifactId can be defined here
+        description 'This module add an Interceptor to Karyon so that log all requests.'
+        url 'https://github.com/scm-spain/karyon2-accesslog'
+
+        scm {
+            connection 'scm:git@github.com:scm-spain/karyon2-accesslog.git'
+            developerConnection 'scm:git@github.com:scm-spain/karyon2-accesslog.git'
+            url 'https://github.com/scm-spain/karyon2-accesslog'
+        }
+
+        licenses {
+            license {
+                name 'The Apache License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
+        }
+
+        developers {
+            developer {
+                id 'aramirez-es'
+                name 'Alberto Ramirez'
+                email 'alberto.ramirez@scmspain.com'
+                organization 'SCM Spain'
+                organizationUrl 'http://www.scmspain.com/'
+            }
+            developer {
+                id 'victuxbb'
+                name 'Victor Caldentey'
+                email 'victor.caldentey@scmspain.com'
+                organization 'SCM Spain'
+                organizationUrl 'http://www.scmspain.com/'
+            }
+        }
+    }
+}
+
+scmVersion {
+    ignoreUncommittedChanges = false
+}
+
+
+allprojects {
+    //To force version from command line
+    //>gradle markNextVersion -Prelease.nextVersion=X.X.X
+    project.version = scmVersion.version
+}
