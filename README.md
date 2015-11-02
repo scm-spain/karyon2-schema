@@ -16,6 +16,8 @@ public interface AppServerForTesting {
 }
 ```
 
+Then, create a **Schema.json** in your resources folder and fill with your micro service's Swagger Documentation. 
+
 ## Gradle
 
 Add dependency as follows:
