@@ -21,7 +21,8 @@ public class SchemaController {
   private static final String CONTENT_TYPE = "application/json";
   private static final String ORIGIN = "*";
   private static final String METHODS = "GET, OPTIONS";
-  private static final String HEADERS = "content-type, accept";
+  private static final String HEADERS = String.join(",",
+      HttpHeaders.Names.CONTENT_TYPE, HttpHeaders.Names.ACCEPT);
 
   @Path(value = "/schema", method = HttpMethod.OPTIONS)
   public Observable<Void> optionsSchema(HttpServerResponse<ByteBuf> response) {

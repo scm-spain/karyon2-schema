@@ -13,10 +13,10 @@ import io.reactivex.netty.protocol.http.client.HttpResponseHeaders;
 import netflix.karyon.Karyon;
 import netflix.karyon.KaryonServer;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class SchemaControllerTest {
@@ -40,13 +40,13 @@ public class SchemaControllerTest {
     String body = RxNetty.createHttpClient("localhost",
         AppServerForTesting.AppServer.DEFAULT_PORT)
           .submit(HttpClientRequest.createGet("/schema"))
-          .doOnNext(response -> Assert.assertEquals(HttpResponseStatus.OK, response.getStatus()))
+          .doOnNext(response -> assertEquals(HttpResponseStatus.OK, response.getStatus()))
           .flatMap(HttpClientResponse::getContent)
           .map(content -> content.toString(Charset.defaultCharset()))
           .timeout(10, TimeUnit.SECONDS)
           .toBlocking().single();
 
-    Assert.assertEquals("{\"hello\": \"world\"}", body);
+    assertEquals("{\"hello\": \"world\"}", body);
   }
 
   @Test
