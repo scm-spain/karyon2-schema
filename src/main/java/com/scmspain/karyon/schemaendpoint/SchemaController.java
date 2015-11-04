@@ -1,6 +1,7 @@
 package com.scmspain.karyon.schemaendpoint;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.reactivex.netty.protocol.http.server.HttpServerResponse;
 import java.io.BufferedReader;
@@ -17,11 +18,18 @@ public class SchemaController {
 
   private static final String SCHEMA_FILE = "schema.json";
 
-  private static final String CONTENT_TYPE_HEADER = "Content-Type";
   private static final String CONTENT_TYPE = "application/json";
-
-  private static final String ORIGIN_HEADER = "Access-Control-Allow-Origin";
   private static final String ORIGIN = "*";
+  private static final String METHODS = "GET, OPTIONS";
+  private static final String HEADERS = String.join(",",
+      HttpHeaders.Names.CONTENT_TYPE, HttpHeaders.Names.ACCEPT);
+
+  @Path(value = "/schema", method = HttpMethod.OPTIONS)
+  public Observable<Void> optionsSchema(HttpServerResponse<ByteBuf> response) {
+    addJsonHeaders(response);
+    response.setStatus(HttpResponseStatus.NO_CONTENT);
+    return Observable.empty();
+  }
 
   @Path(value = "/schema", method = HttpMethod.GET)
   public Observable<Void> getSchema(HttpServerResponse<ByteBuf> response) {
@@ -74,8 +82,10 @@ public class SchemaController {
 
   private HttpServerResponse<ByteBuf> addJsonHeaders(HttpServerResponse<ByteBuf> response) {
 
-    response.getHeaders().add(CONTENT_TYPE_HEADER, CONTENT_TYPE);
-    response.getHeaders().add(ORIGIN_HEADER, ORIGIN);
+    response.getHeaders().add(HttpHeaders.Names.CONTENT_TYPE, CONTENT_TYPE);
+    response.getHeaders().add(HttpHeaders.Names.ACCESS_CONTROL_ALLOW_ORIGIN, ORIGIN);
+    response.getHeaders().add(HttpHeaders.Names.ACCESS_CONTROL_ALLOW_METHODS, METHODS);
+    response.getHeaders().add(HttpHeaders.Names.ACCESS_CONTROL_ALLOW_HEADERS, HEADERS);
 
     return response;
   }
