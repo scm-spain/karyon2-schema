@@ -21,7 +21,19 @@ public class SchemaController {
   private static final String CONTENT_TYPE = "application/json";
 
   private static final String ORIGIN_HEADER = "Access-Control-Allow-Origin";
+  private static final String METHODS_HEADER = "Access-Control-Allow-Methods";
+  private static final String ALLOWED_HEADERS_HEADER = "Access-Control-Allow-Headers";
+
   private static final String ORIGIN = "*";
+  private static final String METHODS = "GET, OPTIONS";
+  private static final String HEADERS = "content-type, accept";
+
+  @Path(value = "/schema", method = HttpMethod.OPTIONS)
+  public Observable<Void> optionsSchema(HttpServerResponse<ByteBuf> response) {
+    addJsonHeaders(response);
+    response.setStatus(HttpResponseStatus.NO_CONTENT);
+    return Observable.empty();
+  }
 
   @Path(value = "/schema", method = HttpMethod.GET)
   public Observable<Void> getSchema(HttpServerResponse<ByteBuf> response) {
@@ -76,6 +88,8 @@ public class SchemaController {
 
     response.getHeaders().add(CONTENT_TYPE_HEADER, CONTENT_TYPE);
     response.getHeaders().add(ORIGIN_HEADER, ORIGIN);
+    response.getHeaders().add(METHODS_HEADER, METHODS);
+    response.getHeaders().add(ALLOWED_HEADERS_HEADER, HEADERS);
 
     return response;
   }
