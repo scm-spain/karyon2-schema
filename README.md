@@ -1,4 +1,7 @@
 # Schema Endpoint module for Karyon2
+
+[![Build Status](https://travis-ci.org/scm-spain/karyon2-schema.svg)](https://travis-ci.org/scm-spain/karyon2-schema)
+
 This module for the Netflix framework Karyon adds an endpoint ```[GET] /schema``` that is used to Swagger Documentation.
 
 ## Documentation
