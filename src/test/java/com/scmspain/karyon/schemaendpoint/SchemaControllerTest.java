@@ -9,7 +9,6 @@ import io.reactivex.netty.protocol.http.client.HttpClientRequest;
 import io.reactivex.netty.protocol.http.client.HttpClientResponse;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
-
 import io.reactivex.netty.protocol.http.client.HttpResponseHeaders;
 import netflix.karyon.Karyon;
 import netflix.karyon.KaryonServer;
@@ -17,6 +16,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.assertTrue;
 
 public class SchemaControllerTest {
@@ -60,7 +60,8 @@ public class SchemaControllerTest {
               assertTrue(headers.contains("Access-Control-Allow-Origin"));
               assertTrue(headers.contains("Access-Control-Allow-Methods"));
               assertTrue(headers.contains("Access-Control-Allow-Headers"));
-          })
+            }
+          )
           .timeout(10, TimeUnit.SECONDS)
           .toBlocking().single();
   }
