@@ -26,7 +26,7 @@ Then, create a **Schema.json** in your resources folder and fill with your micro
 Add dependency as follows:
 
 ```
-    compile 'com.scmspain:karyon2-schema:0.1.0'
+    compile 'com.scmspain.karyon:karyon2-schema:0.1.0'
 ```
 
 ## AppServer.properties
