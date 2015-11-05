@@ -11,16 +11,16 @@ nexusStaging {
 
 modifyPom {
     project {
-        name 'com.scmspain.karyon:karyon2-accesslog'
+        name 'com.scmspain.karyon:karyon2-schema'
         packaging 'jar'
         // optionally artifactId can be defined here
-        description 'This module add an Interceptor to Karyon so that log all requests.'
-        url 'https://github.com/scm-spain/karyon2-accesslog'
+        description 'This module adds an endpoint /schema that is used to Swagger Documentation. This module depends on com.scmspain.karyon:karyon-rest-router.'
+        url 'https://github.com/scm-spain/karyon2-schema'
 
         scm {
-            connection 'scm:git@github.com:scm-spain/karyon2-accesslog.git'
-            developerConnection 'scm:git@github.com:scm-spain/karyon2-accesslog.git'
-            url 'https://github.com/scm-spain/karyon2-accesslog'
+            connection 'scm:git@github.com:scm-spain/karyon2-schema.git'
+            developerConnection 'scm:git@github.com:scm-spain/karyon2-schema.git'
+            url 'https://github.com/scm-spain/karyon2-schema'
         }
 
         licenses {
@@ -35,13 +35,6 @@ modifyPom {
                 id 'aramirez-es'
                 name 'Alberto Ramirez'
                 email 'alberto.ramirez@scmspain.com'
-                organization 'SCM Spain'
-                organizationUrl 'http://www.scmspain.com/'
-            }
-            developer {
-                id 'victuxbb'
-                name 'Victor Caldentey'
-                email 'victor.caldentey@scmspain.com'
                 organization 'SCM Spain'
                 organizationUrl 'http://www.scmspain.com/'
             }
